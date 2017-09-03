@@ -27,6 +27,7 @@ ARFLAGS = -rv
 ALL_LIB = libcommon.a
 ALL_LIB += libdriver.a
 ALL_LIB += libglib.a
+ALL_LIB += libfs.a
 ALL_LIB += libgcc.lib
 
 ALL_SRC = start_up.o $(ALL_LIB)
@@ -46,6 +47,9 @@ libcommon.a:
 libdriver.a:
 	$(MAKE) -C driver
 
+libfs.a:
+	$(MAKE) -C fs
+
 start_up.o:
 	$(AS) $(ASFLAGS) -o start_up.o -c ./cm3/start_up.S
 
@@ -54,5 +58,6 @@ clean:
 	$(MAKE) clean -C common
 	$(MAKE)	clean -C driver
 	$(MAKE) clean -C glib
+	$(MAKE) clean -C fs
 	rm -f *.o *.a *.elf *.bin *.txt
 
