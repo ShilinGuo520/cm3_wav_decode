@@ -5,31 +5,16 @@
 #include "leds.h"
 #include "config.h"
 
-void led_init(char num)
+void led_init(void)
 {
-	RCC->APB2ENR |= 1 << 3;
-
-	if (LED_PIN > 7) {
-		GPIOB->CRH &= (~(0xF << ((LED_PIN - 8) * 4)));
-		GPIOB->CRH |= (0x1 << ((LED_PIN - 8) * 4));
-	} else {
-		GPIOB->CRL &= (~(0xF << (((LED_PIN) % 7) * 4)));
-		GPIOB->CRL |= (0x1 << (((LED_PIN) % 7) * 4));
-	}
-}
-
-void led_on(char num)
-{
-	GPIOB->ODR |= (1 << LED_PIN);
-}
-
-void led_off(char num)
-{
-	GPIOB->ODR &= ~(1 << LED_PIN);
-}
-
-void leds_blink(char num)
-{
-	led_off(num);
-	led_on(num);
+	RCC->APB2ENR|=1<<3;    
+	RCC->APB2ENR|=1<<6;
+		 
+	GPIOB->CRL&=0XFF0FFFFF; 
+	GPIOB->CRL|=0X00300000;//PB.5  
+	GPIOB->ODR|=1<<5;	   //PB.5
+											  
+	GPIOE->CRL&=0XFF0FFFFF;
+	GPIOE->CRL|=0X00300000;//PE.5
+	GPIOE->ODR|=1<<5;	   //PE.5
 }

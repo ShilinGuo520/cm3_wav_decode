@@ -1,31 +1,29 @@
 #include "common.h"
 #include "types.h"
-#include "nvic.h"
-
 
 
 typedef struct
 {
-  volatile unsigned long CR1;
-  volatile unsigned long CR2;
-  volatile unsigned long SMCR;
-  volatile unsigned long DIER;
-  volatile unsigned long SR;
-  volatile unsigned long EGR;
-  volatile unsigned long CCMR1;
-  volatile unsigned long CCMR2;
-  volatile unsigned long CCER;
-  volatile unsigned long CNT;
-  volatile unsigned long PSC;
-  volatile unsigned long ARR;
-  volatile unsigned long RCR;
-  volatile unsigned long CCR1;
-  volatile unsigned long CCR2;
-  volatile unsigned long CCR3;
-  volatile unsigned long CCR4;
-  volatile unsigned long BDTR;
-  volatile unsigned long DCR;
-  volatile unsigned long DMAR;
+volatile unsigned long CR1;
+volatile unsigned long CR2;
+volatile unsigned long SMCR;
+volatile unsigned long DIER;
+volatile unsigned long SR;
+volatile unsigned long EGR;
+volatile unsigned long CCMR1;
+volatile unsigned long CCMR2;
+volatile unsigned long CCER;
+volatile unsigned long CNT;
+volatile unsigned long PSC;
+volatile unsigned long ARR;
+volatile unsigned long RCR;
+volatile unsigned long CCR1;
+volatile unsigned long CCR2;
+volatile unsigned long CCR3;
+volatile unsigned long CCR4;
+volatile unsigned long BDTR;
+volatile unsigned long DCR;
+volatile unsigned long DMAR;
 } TIM_TypeDef;
 
 
@@ -54,8 +52,6 @@ typedef struct
 #define TIM13               ((TIM_TypeDef *) TIM13_BASE)
 #define TIM14               ((TIM_TypeDef *) TIM14_BASE)
 
-extern void timer_init(u16 arr ,u16 psc);
-extern void set_time_out(int time);
-extern bool get_time_out();
-extern void delay_ms(int time);
+
+void timerx_init(u16 arr,u16 psc);
 

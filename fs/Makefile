@@ -3,7 +3,7 @@ MCU      = cortex-m3
 SUBMDL   = stm32f103
 
 TARGET = libfs.a
-SRC = fs.o
+SRC = ff.o cc936.o diskio.o mmc_sd.o spi.o
 
 # toolchain (using code sourcery now)
 THUMB    = -mthumb
