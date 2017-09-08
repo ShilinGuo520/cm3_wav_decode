@@ -30,9 +30,9 @@ int main()
 	u32 total,free;
 	u8 t=0;		   	   
 	u8 res;
-	DIR mp3dir;	 		//
-	FILINFO mp3fileinfo;//
-	u8 *fn;   			//
+	DIR mp3dir;	 	
+	FILINFO mp3fileinfo;
+	u8 *fn;  
 	u8 pname[50];
 
 	nvic_vtor_remapping(APP_START_ADD - 0x08000000);
@@ -59,9 +59,27 @@ int main()
 	printf("SD Total Size: %d MB\r\n", (total>>10));	 
 	printf("SD  Free Size: %d MB\r\n", (free>>10)); 	
 
-	wav_play_song("0:/MUSIC/rongyao.wav");
+	res=f_opendir(&mp3dir,"0:/MUSIC");
 
-	res = f_opendir(&mp3dir,"0:/MUSIC"); 
+	if (res == FR_OK)
+	{
+		while(1)
+		{
+	    	res=f_readdir(&mp3dir,&mp3fileinfo);
+			if(res!=FR_OK||mp3fileinfo.fname[0]==0) {
+				printf("read done\r\n");
+				break;		  
+			}
+
+			fn = (u8*)(*mp3fileinfo.lfname?mp3fileinfo.lfname:mp3fileinfo.fname);
+
+			strcpy((char*)pname,"0:/MUSIC/");
+			strcat((char*)pname,(const char*)fn);
+			printf("file name:%s \r\n", pname);
+			wav_play_song(pname);  
+		} 
+	} 
+
 
 	while(1) {
         LED1=!LED1;

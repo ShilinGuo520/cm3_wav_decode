@@ -2,6 +2,8 @@
 #include "diskio.h"
 #include "gpio.h"
 #include "glib.h"
+#include "mem.h"
+
 
 #define SD_CARD	 0  //SD¿¨,¾í±êÎª0
 

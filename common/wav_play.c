@@ -101,6 +101,15 @@ u8 WAV_Init(u8* pbuf)
 	return 0;
 }
 
+
+u8 hufman(u8 buff)
+{
+	if (buff == 0)
+		return 1;
+	else
+		return 0;
+}
+
 u8 Playwav(FIL *wav_file)
 {
 	u8 res;
@@ -128,14 +137,14 @@ u8 Playwav(FIL *wav_file)
 	printf("times:%d\r\n",times);
 	for(i=0; i<times; i++) {
 		while(!DACdone)
-			printf("DACdone:%d\r\n", DACdone);
+			printf("\r");
 		
 		DACdone=0;
 		
 		f_read(wav_file,wav_buf, 512, (UINT*)&br);
 
 		while(!DACdone)
-			printf("DACdone:%d\r\n", DACdone);
+			printf("\r");
 		
 		DACdone=0;
 		
@@ -158,7 +167,7 @@ u8 wav_play_song(u8 *pname)
 		//read_header_info(fmp3);
 		Playwav(&wav_file);
 		f_close(&wav_file);
-		printf("**************close**************** \r\n\r\n\r\n\r\n\r\n\r\n");
+		printf("**************close**************** \r\n");
 	}
 	
 	return res;  	  	  	 		  	    

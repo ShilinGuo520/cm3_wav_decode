@@ -4,7 +4,7 @@ ARCH     = armv7-m
 SUBMDL   = stm32f103
 
 TARGET = libglib.a
-SRC = glib.o
+SRC = glib.o mem.o
 
 # toolchain (using code sourcery now)
 THUMB    = -mthumb
